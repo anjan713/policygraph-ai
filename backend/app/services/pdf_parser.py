@@ -1,7 +1,6 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any
-import re
 
 from ..core.config import settings
 
@@ -98,31 +97,38 @@ class PdfParser:
         return self._extract_text_from_result(result)
 
     def _extract_text_from_result(self, result: Any) -> str:
+        """Pull recognized text lines out of a PaddleOCR result.
+
+        Supports PaddleOCR 3.x result objects (which expose ``rec_texts``) and the
+        2.x ``[box, (text, score)]`` row shape. Only recognized text is collected;
+        result metadata such as the input image path is deliberately ignored so it
+        cannot leak into the extracted policy text.
+        """
         lines: list[str] = []
 
         def walk(value: Any):
             if value is None:
                 return
             if isinstance(value, dict):
-                # Newer PaddleOCR result objects/dicts commonly expose rec_texts.
+                # PaddleOCR 3.x result objects expose recognized text as rec_texts.
                 rec_texts = value.get("rec_texts") or value.get("texts")
                 if isinstance(rec_texts, list):
                     for item in rec_texts:
                         if isinstance(item, str) and item.strip():
                             lines.append(item.strip())
+                    # rec_texts is the authoritative OCR output; stop here so sibling
+                    # keys (input_path, configs) cannot leak into the extracted text.
+                    return
                 for child in value.values():
                     walk(child)
                 return
-            if isinstance(value, str):
-                if value.strip() and not re.fullmatch(r"[0-9.]+", value.strip()):
-                    lines.append(value.strip())
-                return
             if isinstance(value, (list, tuple)):
-                # 2.x result shape includes [box, (text, score)] rows.
+                # PaddleOCR 2.x rows look like [box, (text, score)].
                 if len(value) == 2 and isinstance(value[1], (list, tuple)) and value[1]:
                     maybe_text = value[1][0]
                     if isinstance(maybe_text, str) and maybe_text.strip():
                         lines.append(maybe_text.strip())
+                        return
                 for child in value:
                     walk(child)
 

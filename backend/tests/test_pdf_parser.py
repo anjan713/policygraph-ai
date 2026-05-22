@@ -19,6 +19,12 @@ def test_extracts_paddleocr_2x_line_tuples():
     assert _extract(result) == "Prior authorization required"
 
 
-def test_skips_numeric_only_lines_and_dedupes():
-    lines = ["Section 1 Overview", "123.45", "Section 1 Overview"]
-    assert _extract(lines) == "Section 1 Overview"
+def test_ignores_result_metadata_and_dedupes():
+    # A 3.x result object also carries metadata such as input_path; only the
+    # recognized rec_texts must be returned, and duplicate lines collapsed.
+    result = [{
+        "input_path": "/tmp/policygraph_ocr_abcd/page_1.png",
+        "page_index": 0,
+        "rec_texts": ["Coverage Criteria", "Coverage Criteria", "Prior authorization required"],
+    }]
+    assert _extract(result) == "Coverage Criteria\nPrior authorization required"
