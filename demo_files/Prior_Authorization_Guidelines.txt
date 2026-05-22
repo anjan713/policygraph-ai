@@ -1,0 +1,10 @@
+Policy Summary: Prior Authorization Guidelines
+
+Prior Authorization
+Prior authorization is required for advanced imaging, selected specialty medications, and out-of-network procedures.
+A request is eligible for review when provider documentation includes diagnosis, requested procedure, clinical notes, and medical necessity.
+Requests missing provider documentation require manual review.
+
+Decision Rules
+Services are covered when medical necessity criteria are met and the requested service is listed as eligible under the member policy.
+Services are not covered when policy exclusions apply or documentation is insufficient after review.

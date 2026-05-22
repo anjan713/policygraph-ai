@@ -1,0 +1,10 @@
+Policy Summary: MRI Coverage Policy
+
+Coverage Criteria
+MRI lumbar spine is covered when symptoms persist after 6 weeks of conservative treatment and provider documentation supports medical necessity.
+MRI lumbar spine requires prior authorization when requested for chronic lower back pain without neurological deficit.
+MRI lumbar spine is not covered for routine screening when symptoms do not persist or when conservative treatment has not been attempted.
+
+Medical Necessity
+Documentation must include diagnosis, duration of symptoms, conservative treatment history, and clinical rationale.
+Exceptions may be reviewed when urgent neurological symptoms are documented by the treating provider.

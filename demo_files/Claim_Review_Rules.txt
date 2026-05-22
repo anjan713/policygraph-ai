@@ -1,0 +1,7 @@
+Policy Summary: Claim Review Rules
+
+Claim Review
+Claim review requires matching procedure, diagnosis, member eligibility, service date, and provider documentation.
+A claim is eligible when the procedure is covered, authorization is present when required, and documentation supports medical necessity.
+A claim requires manual review when required fields are missing or policy rules conflict.
+A claim is not covered when the service is excluded by policy or member eligibility is inactive for the service date.

@@ -1,0 +1,9 @@
+Policy Summary: Diabetes Care Policy
+
+Diabetes Care
+HbA1c testing every 3 months is covered for patients with uncontrolled diabetes or medication changes.
+Diabetes care management is covered when provider documentation shows ongoing diagnosis and active treatment plan.
+Continuous glucose monitoring requires prior authorization when requested for patients without insulin therapy documentation.
+
+Exclusions
+Routine duplicate testing is not covered when recent equivalent testing is available and no clinical change is documented.
