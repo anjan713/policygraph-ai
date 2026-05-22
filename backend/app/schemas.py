@@ -57,6 +57,8 @@ class QueryResponse(BaseModel):
     confidence: float
     citations: list[Citation]
     graph_context: list[dict[str, Any]] = []
+    answer_mode: str = "rule_based"  # vertex_gemini | rule_based | no_evidence
+    model: str | None = None
 
 class CaseValidationRequest(BaseModel):
     procedure: str
