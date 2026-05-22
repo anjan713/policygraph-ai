@@ -45,10 +45,13 @@ class Settings:
     paddleocr_lang: str = os.getenv("PADDLEOCR_LANG", "en")
     ocr_render_dpi: int = int(os.getenv("OCR_RENDER_DPI", "200"))
 
-    # Optional GCP AI settings for production upgrades.
+    # Vertex AI agent settings. When USE_VERTEX_AI=true the Graph-RAG query
+    # pipeline uses a Gemini model on Vertex AI to generate grounded answers.
+    use_vertex_ai: bool = os.getenv("USE_VERTEX_AI", "false").lower() == "true"
     vertex_ai_location: str = os.getenv("VERTEX_AI_LOCATION", os.getenv("GCP_REGION", "us-central1"))
     vertex_embedding_model: str = os.getenv("VERTEX_EMBEDDING_MODEL", "text-embedding-005")
-    vertex_llm_model: str = os.getenv("VERTEX_LLM_MODEL", "gemini-1.5-flash")
+    vertex_llm_model: str = os.getenv("VERTEX_LLM_MODEL", "gemini-2.5-pro")
+    vertex_max_output_tokens: int = int(os.getenv("VERTEX_MAX_OUTPUT_TOKENS", "8192"))
 
     cors_origins: str = os.getenv("CORS_ORIGINS", "http://localhost:3000")
 
