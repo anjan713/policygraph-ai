@@ -5,6 +5,7 @@ from .db import init_db
 from .api.documents import router as documents_router
 from .api.query import router as query_router
 from .api.graph import router as graph_router
+from .services.vertex_agent import VertexAgent
 
 init_db()
 
@@ -21,7 +22,16 @@ app.add_middleware(
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "database": "postgresql+pgvector", "queue": "redis/rq", "graph": "neo4j", "storage": "gcs_or_local", "ocr": "paddleocr"}
+    agent = VertexAgent()
+    return {
+        "status": "ok",
+        "database": "postgresql+pgvector",
+        "queue": "redis/rq",
+        "graph": "neo4j",
+        "storage": "gcs_or_local",
+        "ocr": "paddleocr",
+        "agent": agent.model if agent.is_available() else "rule-based",
+    }
 
 app.include_router(documents_router)
 app.include_router(query_router)
