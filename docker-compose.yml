@@ -53,6 +53,10 @@ services:
       OCR_ENGINE: paddleocr
       PADDLEOCR_LANG: ${PADDLEOCR_LANG:-en}
       OCR_RENDER_DPI: ${OCR_RENDER_DPI:-200}
+      USE_VERTEX_AI: ${USE_VERTEX_AI:-false}
+      VERTEX_LLM_MODEL: ${VERTEX_LLM_MODEL:-gemini-2.5-pro}
+      VERTEX_AI_LOCATION: ${VERTEX_AI_LOCATION:-us-central1}
+      VERTEX_MAX_OUTPUT_TOKENS: ${VERTEX_MAX_OUTPUT_TOKENS:-8192}
     volumes:
       - ./backend/data:/app/data
       - ${GOOGLE_APPLICATION_CREDENTIALS:-/dev/null}:${GOOGLE_APPLICATION_CREDENTIALS:-/dev/null}:ro
@@ -83,6 +87,10 @@ services:
       OCR_ENGINE: paddleocr
       PADDLEOCR_LANG: ${PADDLEOCR_LANG:-en}
       OCR_RENDER_DPI: ${OCR_RENDER_DPI:-200}
+      USE_VERTEX_AI: ${USE_VERTEX_AI:-false}
+      VERTEX_LLM_MODEL: ${VERTEX_LLM_MODEL:-gemini-2.5-pro}
+      VERTEX_AI_LOCATION: ${VERTEX_AI_LOCATION:-us-central1}
+      VERTEX_MAX_OUTPUT_TOKENS: ${VERTEX_MAX_OUTPUT_TOKENS:-8192}
     volumes:
       - ./backend/data:/app/data
       - ${GOOGLE_APPLICATION_CREDENTIALS:-/dev/null}:${GOOGLE_APPLICATION_CREDENTIALS:-/dev/null}:ro
