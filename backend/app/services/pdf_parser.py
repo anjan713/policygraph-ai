@@ -32,10 +32,25 @@ class PdfParser:
 
         # PaddleOCR 3.x and 2.x use slightly different constructor names. Try the newer
         # option first, then fall back to the widely used 2.x API.
+        #
+        # enable_mkldnn=False is required: paddlepaddle 3.x crashes during CPU inference
+        # when the PIR executor lowers oneDNN ops (ConvertPirAttribute2RuntimeAttribute
+        # not supported). Disabling oneDNN routes inference through the standard kernels.
+        #
+        # The doc-orientation, unwarping, and textline-orientation stages are disabled and
+        # the lighter mobile detection model is used: PyMuPDF renders PDF pages upright and
+        # flat, so those stages only add memory pressure and latency without improving OCR.
         try:
-            self._ocr = PaddleOCR(use_textline_orientation=True, lang=settings.paddleocr_lang)
+            self._ocr = PaddleOCR(
+                lang=settings.paddleocr_lang,
+                enable_mkldnn=False,
+                use_doc_orientation_classify=False,
+                use_doc_unwarping=False,
+                use_textline_orientation=False,
+                text_detection_model_name="PP-OCRv5_mobile_det",
+            )
         except TypeError:
-            self._ocr = PaddleOCR(use_angle_cls=True, lang=settings.paddleocr_lang)
+            self._ocr = PaddleOCR(use_angle_cls=True, lang=settings.paddleocr_lang, enable_mkldnn=False)
         return self._ocr
 
     def extract_pages(self, path: Path) -> list[dict]:
