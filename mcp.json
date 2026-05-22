@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "gcloud": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@google-cloud/gcloud-mcp"
+      ],
+      "env": {
+        "GOOGLE_CLOUD_PROJECT": "${GOOGLE_CLOUD_PROJECT}",
+        "CLOUDSDK_CORE_PROJECT": "${GOOGLE_CLOUD_PROJECT}",
+        "CLOUDSDK_COMPUTE_REGION": "us-west1"
+      }
+    },
+    "gcs-storage": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@google-cloud/storage-mcp"
+      ],
+      "env": {
+        "GOOGLE_CLOUD_PROJECT": "${GOOGLE_CLOUD_PROJECT}",
+        "CLOUDSDK_CORE_PROJECT": "${GOOGLE_CLOUD_PROJECT}"
+      }
+    }
+  }
+}

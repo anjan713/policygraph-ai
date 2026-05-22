@@ -1,0 +1,9 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ['build', '-t', '${_REGION}-docker.pkg.dev/$PROJECT_ID/policygraph-ai/backend:$SHORT_SHA', './backend']
+  - name: gcr.io/cloud-builders/docker
+    args: ['push', '${_REGION}-docker.pkg.dev/$PROJECT_ID/policygraph-ai/backend:$SHORT_SHA']
+substitutions:
+  _REGION: us-central1
+images:
+  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/policygraph-ai/backend:$SHORT_SHA'
